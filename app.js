@@ -15,12 +15,15 @@ const userRouter = require('./routers/userRouter.js')(User);
 const Product = new require('./models/productModel');
 const productRouter = require('./routers/productRouter.js')(Product);
 
-// User.create({
-//   username: 'perryjanssen',
-//   password: '12345678',
-//   fullName: 'Perry Janssen',
-//   email: 'psperryjanssen2@gmail.com',
-// });
+const Usage = new require('./models/usageModel');
+const usageRouter = require('./routers/usageRouter.js')(Usage);
+
+// Uncomment the following two lines to seed the database
+// const productSeeder = require('./seeders/productSeeder')(Product);
+// productSeeder.seed(true);
+
+// const usageSeeder = require('./seeders/usageSeeder')(Usage);
+// usageSeeder.seed(true);
 
 /**
  * Set HTTP headers
@@ -44,6 +47,8 @@ let port = process.env.PORT || 80;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/api/users', userRouter);
+app.use('/api/products', productRouter);
+app.use('/api/usage', usageRouter);
 
 app.get('/', function(req, res) {
   res.send({
