@@ -23,14 +23,14 @@ let usageSeeder = function (Usage) {
     }
 
     Usage.create({
-      user_id: 'PERRY',
-      product_id: 'WIJN',
+      user_id: '5ac4aacf2bfbf206f7805fb8',
+      product_id: '5acb61da980f300b69afcefe',
       count: 3,
     });
 
     Usage.create({
-      user_id: 'PERRY',
-      product_id: 'BIER',
+      user_id: '5ac4aacf2bfbf206f7805fb8',
+      product_id: '5acb61da980f300b69afcf00',
       count: 10,
     });
 

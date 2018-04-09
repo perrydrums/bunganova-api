@@ -24,30 +24,30 @@ let productSeeder = function (Product) {
 
     Product.create({
       name: 'Bier',
-      description: 'Een flesje bier',
+      description: 'Een verfrissend flesje Heineken bier.',
       price: 1.00,
-      image: 'https://drizly-products1.imgix.net/ci-heineken-lager-6ea7dedfaaced647.jpeg?auto=format%2Ccompress&fm=jpeg&q=20',
+      image: 'https://i.imgur.com/p3doiW0.png',
     });
 
     Product.create({
       name: 'Wijn',
-      description: 'Een glaasje wijn',
+      description: 'Een lekker wit of rood wijntje naar keuze.',
       price: 1.50,
-      image: 'https://www.bbqenzo.nl/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/d/r/drank-rode-wijn.jpg',
+      image: 'https://i.imgur.com/1QBvnWa.png',
     });
 
     Product.create({
-      name: 'Bacardi Cola',
-      description: 'Bacardi rum met Coca Cola',
+      name: 'Mix drank',
+      description: 'Sterke drank gecombineerd met frisdrank.',
       price: 3.00,
-      image: 'https://www.mitra.nl/cms/userfiles/cocktails/6-bacardi_2.png',
+      image: 'https://i.imgur.com/XeSt9Y9.png',
     });
 
     Product.create({
       name: 'Lachgas',
-      description: 'Een ballonnetje met di-stikstof-mono-oxide',
+      description: 'Een ballonnetje met "di-stikstof-mono-oxide"',
       price: 1.00,
-      image: 'https://www.zamnesia.nl/4904-12377/slagroompatronen.jpg',
+      image: 'https://i.imgur.com/NAB3L1q.png',
     });
 
   };
