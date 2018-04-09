@@ -48,7 +48,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
-app.use('/api/usage', usageRouter);
+app.use('/api/usages', usageRouter);
 
 app.get('/', function(req, res) {
   res.send({
