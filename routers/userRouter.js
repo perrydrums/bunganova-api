@@ -14,7 +14,7 @@ let routes = function (User) {
       let user = new User(req.body);
       user.save(function (err) {
         if (err) {
-          res.status(406).send(err);
+          res.status(200).send(err);
         }
         else {
           res.status(201).send(user);
@@ -32,12 +32,12 @@ let routes = function (User) {
   userRouter.route('/:username')
     .get(function (req, res) {
       User.find({username: req.params.username}, function (err, user) {
-        if (err) res.status(406).send(err);
+        if (err) res.status(200).send(err);
         else if (user) {
           req.user = user;
           res.send(user);
         }
-        else res.status(404).send('No user found with username: ' + req.params.username);
+        else res.status(404).send({ error: { message: 'No user found with username: ' + req.params.username, type: 'user_not_found'}});
       });
     });
 
