@@ -22,8 +22,8 @@ let routes = function (Usage) {
       });
     })
     .get(function(req, res) {
-      Usage.find({}, function (err, products){
-        res.send(products);
+      Usage.find({}, function (err, usages) {
+        res.send(usages);
       })
     })
     .options(function (req, res) {
@@ -48,8 +48,30 @@ let routes = function (Usage) {
       Usage.find({user_id: req.params.userId}, function (err, usage) {
         if (err) res.status(200).send(err);
         else if (usage) {
-          req.usage = usage;
-          res.send(usage);
+          if (usage.length === 0) {
+            res.status(400).send({ error: { message: 'No user with usage found with user ID: ' + req.params.userId, type: 'usage_user_not_found'}});
+            return;
+          }
+
+          let allUsages = {};
+          // Create one response item with all counts added up per product.
+          usage.forEach(function (item, index) {
+            let productId = item.product_id;
+
+            // Add counts and prices together
+            if (allUsages[productId]) {
+              allUsages[productId] += item.count;
+            } else {
+              allUsages[productId] = item.count;
+            }
+          });
+
+          const response = {
+            user_id: req.params.userId,
+            usages: allUsages,
+          };
+
+          res.send(response);
         }
         else res.status(404).send({ error: { message: 'No user with usage found with user ID: ' + req.params.userId, type: 'usage_user_not_found'}});
       });
