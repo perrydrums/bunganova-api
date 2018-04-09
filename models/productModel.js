@@ -15,17 +15,16 @@ let productModel = new Schema({
   },
   description: {
     type: String,
-    required: [true, 'Description is required!']
+    required: [true, 'Description is required!'],
   },
   price: {
     type: Number,
     min: 0,
-    required: [true, 'Price is required!']
+    required: [true, 'Price is required!'],
   },
   image: {
     type: String,
     required: [true, 'Image is required!'],
-    unique: true
   },
 });
 

@@ -3,14 +3,17 @@
  */
 require('dotenv').config();
 
-let express = require('express');
-let mongoose = require('mongoose');
-let bodyParser = require('body-parser');
-let db = mongoose.connect('mongodb://localhost/bunganova', { useMongoClient: true });
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const db = mongoose.connect('mongodb://localhost/bunganova', { useMongoClient: true });
 let app = express();
 
-let User = new require('./models/userModel');
-let userRouter = require('./routers/userRouter.js')(User);
+const User = new require('./models/userModel');
+const userRouter = require('./routers/userRouter.js')(User);
+
+const Product = new require('./models/productModel');
+const productRouter = require('./routers/productRouter.js')(Product);
 
 // User.create({
 //   username: 'perryjanssen',
