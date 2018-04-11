@@ -58,7 +58,7 @@ let routes = function (Usage) {
           usage.forEach(function (item, index) {
             let productId = item.product_id;
 
-            // Add counts and prices together
+            // Add counts together
             if (allUsages[productId]) {
               allUsages[productId] += item.count;
             } else {
@@ -66,12 +66,36 @@ let routes = function (Usage) {
             }
           });
 
-          const response = {
-            user_id: req.params.userId,
-            usages: allUsages,
-          };
+          const Product = new require('../models/productModel');
+          Product.find({}, function (err, products) {
 
-          res.send(response);
+            // Get the prices and calculate the cost per product
+            let prices = {};
+            let pricesPerUsage = {};
+            let product_names = {};
+            products.forEach(function (product, index) {
+              prices[product._id] = product.price;
+              product_names[product._id] = product.name;
+              if (allUsages[product._id]) {
+                pricesPerUsage[product._id] = product.price * allUsages[product._id];
+              }
+              else {
+                pricesPerUsage[product._id] = 0;
+              }
+            });
+
+            // Create the response
+            const response = {
+              user_id: req.params.userId,
+              usages: allUsages,
+              prices: pricesPerUsage,
+              total_price: calculateTotalPrice(allUsages, prices),
+              names: product_names,
+            };
+            console.log(prices);
+
+            res.send(response);
+          });
         }
         else res.status(404).send({ error: { message: 'No user with usage found with user ID: ' + req.params.userId, type: 'usage_user_not_found'}});
       });
@@ -79,5 +103,18 @@ let routes = function (Usage) {
 
   return usageRouter;
 };
+
+// Calculate the total cost of all usages
+function calculateTotalPrice(counts, prices) {
+  let total = 0;
+  // Loop through all usages
+  console.log(counts);
+  Object.keys(counts).forEach(function (id, index) {
+    // Multiply the count with the price of the product
+    total += (counts[id] * prices[id]);
+  });
+
+  return total;
+}
 
 module.exports = routes;
