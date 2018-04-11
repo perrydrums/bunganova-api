@@ -12,6 +12,7 @@
     "body-parser": "^1.17.1",
     "dotenv": "^5.0.1",
     "express": "^4.15.2",
+    "forever": "^0.15.3",
     "mongoose": "^4.9.9",
     "mongoose-unique-validator": "^2.0.0",
     "morgan": "^1.8.1"
